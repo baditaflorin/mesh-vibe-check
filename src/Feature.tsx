@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNamedPeer, type MeshConfig, type YRoom } from "@baditaflorin/mesh-common";
+import {
+  MeshNameInput,
+  MeshProgressBar,
+  MeshSlider,
+  useNamedPeer,
+  type MeshConfig,
+  type YRoom,
+} from "@baditaflorin/mesh-common";
 
 type Props = { room: YRoom | null; config: MeshConfig };
 
@@ -71,29 +78,25 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
         </p>
       </header>
 
-      <div className="vibe-name">
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="your name"
-          maxLength={48}
-          aria-label="your name"
-        />
-      </div>
+      <MeshNameInput
+        value={name}
+        onChange={setName}
+        placeholder="your name"
+        maxLength={48}
+        className="vibe-name"
+      />
 
       <div className="vibe-sliders" role="group" aria-label="your vibe">
         {AXES.map(({ key, label }) => (
           <div key={key} className="vibe-row" data-axis={key}>
             <span className="vibe-rowlabel">{label}</span>
-            <input
-              className="vibe-slider"
-              data-axis={key}
-              type="range"
+            <MeshSlider
+              value={[mine[key]]}
+              onValueChange={([v]) => writeAxis(key, v ?? 0)}
               min={0}
               max={100}
-              value={mine[key]}
-              onChange={(e) => writeAxis(key, Number(e.target.value))}
-              aria-label={`${label} slider`}
+              ariaLabel={`${label} slider`}
+              className="vibe-slider"
             />
             <span className="vibe-mychip">{Math.round(mine[key])}</span>
           </div>
@@ -113,7 +116,7 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
             <div key={key} className="vibe-avg" data-axis={key} data-value={avg.toFixed(2)}>
               <div className="vibe-avglabel">{label}</div>
               <div className="vibe-bar">
-                <div className="vibe-barfill" style={{ width: `${avg}%` }} />
+                <MeshProgressBar value={avg / 100} className="vibe-bar-progress" />
                 <div className="vibe-dot" style={{ left: `${you}%` }} />
               </div>
               <div className="vibe-gap">

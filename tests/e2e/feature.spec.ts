@@ -14,13 +14,17 @@ test("two peers' sliders average correctly on the other peer", async ({ browser,
     await b.getByPlaceholder("your name").fill("bob");
     await a.waitForTimeout(500);
 
-    // alice sets energy=0 joy=0 focus=0 calm=0 chaos=0
+    // alice sets energy=0 joy=0 focus=0 calm=0 chaos=0 (Home = min on Radix slider)
     for (const axis of ["energy", "joy", "focus", "calm", "chaos"]) {
-      await a.locator(`.vibe-slider[data-axis="${axis}"]`).fill("0");
+      const thumb = a.locator(`.vibe-row[data-axis="${axis}"] [role="slider"]`);
+      await thumb.focus();
+      await thumb.press("Home");
     }
-    // bob sets all = 100
+    // bob sets all = 100 (End = max on Radix slider)
     for (const axis of ["energy", "joy", "focus", "calm", "chaos"]) {
-      await b.locator(`.vibe-slider[data-axis="${axis}"]`).fill("100");
+      const thumb = b.locator(`.vibe-row[data-axis="${axis}"] [role="slider"]`);
+      await thumb.focus();
+      await thumb.press("End");
     }
     await b.waitForTimeout(700);
 
