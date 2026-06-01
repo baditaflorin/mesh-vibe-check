@@ -68,6 +68,7 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
     all.length === 0 ? 0 : all.reduce((s, v) => s + (Number(v[axis]) || 0), 0) / all.length;
 
   const present = room.peerCount + 1;
+  const alone = room.peerCount < 1;
 
   return (
     <div className="vibe-screen">
@@ -85,6 +86,14 @@ function Body({ room, config }: { room: YRoom; config: MeshConfig }) {
         maxLength={48}
         className="vibe-name"
       />
+
+      {alone && (
+        <p className="vibe-hint">
+          Drag the sliders to set your vibe. To compare against the room, open this page in a second
+          tab (or share the 📡 invite link) — the &ldquo;room&rdquo; numbers below are the live
+          average across everyone here.
+        </p>
+      )}
 
       <div className="vibe-sliders" role="group" aria-label="your vibe">
         {AXES.map(({ key, label }) => (

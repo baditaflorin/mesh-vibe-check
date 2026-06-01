@@ -4,7 +4,11 @@
 [![version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/baditaflorin/mesh-vibe-check/blob/main/package.json)
 [![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-> Five-axis vibe sliders → room averages + your gap.
+> Everyone slides five mood dials (energy, joy, focus, calm, chaos); the app shows the room's live average and how far off you are.
+
+Each axis shows the live room average as a bar with a dot for your own value, plus a "you vs room" gap — so you can see at a glance whether you're matching the vibe or the outlier.
+
+**Try it in 30 seconds:** open the live link below, type a name, and drag the sliders. Open the same page in a second tab with a different name to watch the room average move between the two of you.
 
 **Live → https://baditaflorin.github.io/mesh-vibe-check/**
 
