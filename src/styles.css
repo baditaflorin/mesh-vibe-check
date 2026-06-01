@@ -63,6 +63,14 @@ body,
   font-size: 0.95rem;
 }
 
+.vibe-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .vibe-sliders {
   display: flex;
   flex-direction: column;
